@@ -1,4 +1,5 @@
-import { add } from "./server";
+import app from "./server";
 
-// console.log("testing");
-add(12, 2);
+app.listen(4000, () => {
+  console.log("4000 port listening");
+});
