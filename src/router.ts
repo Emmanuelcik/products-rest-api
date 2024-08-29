@@ -5,6 +5,7 @@ import {
   getProductById,
   updateProduct,
   updateAvaiability,
+  deleteProduct,
 } from "./handlers/products.js";
 import { body, param } from "express-validator";
 import { handleInputErrors } from "./middleware/index.js";
@@ -36,6 +37,7 @@ app.post(
 
 app.put(
   `${PRODUCTS_API_PATH}/:id`,
+  param("id").isInt().withMessage("Invalid Id"),
   body("name").notEmpty().withMessage("Product name is required"),
   body("price")
     .isNumeric()
@@ -49,8 +51,15 @@ app.put(
 
 app.patch(
   `${PRODUCTS_API_PATH}/:id`,
-  body("availability").isBoolean().withMessage("Invalid Product availability"),
+  param("id").isInt().withMessage("Invalid Id"),
   handleInputErrors,
   updateAvaiability
+);
+
+app.delete(
+  `${PRODUCTS_API_PATH}/:id`,
+  param("id").isInt().withMessage("Invalid Id"),
+  handleInputErrors,
+  deleteProduct
 );
 export default app;
