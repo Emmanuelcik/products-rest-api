@@ -1,11 +1,21 @@
 import { Router } from "express";
-import { createProduct } from "./handlers/products.js";
-import { body } from "express-validator";
+import {
+  createProduct,
+  getProducts,
+  getProductById,
+} from "./handlers/products.js";
+import { body, param } from "express-validator";
 import { handleInputErrors } from "./middleware/index.js";
+
 const app = Router();
-app.get("/", (req, res) => {
-  res.send(200);
-});
+
+app.get("/api/products", getProducts);
+app.get(
+  "/api/products/:id",
+  param("id").isInt().withMessage("Invalid Id"),
+  handleInputErrors,
+  getProductById
+);
 
 app.post(
   "/api/products",
