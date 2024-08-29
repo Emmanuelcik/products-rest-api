@@ -10,7 +10,7 @@ class Product extends Model {
 
   @Default(true)
   @Column({ type: DataType.BOOLEAN })
-  declare avaibility: boolean;
+  declare availability: boolean;
 }
 
 export default Product;

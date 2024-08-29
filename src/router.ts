@@ -3,22 +3,27 @@ import {
   createProduct,
   getProducts,
   getProductById,
+  updateProduct,
+  updateAvaiability,
 } from "./handlers/products.js";
 import { body, param } from "express-validator";
 import { handleInputErrors } from "./middleware/index.js";
 
+const PRODUCTS_API_PATH = "/api/products";
+
 const app = Router();
 
 app.get("/api/products", getProducts);
+
 app.get(
-  "/api/products/:id",
+  `${PRODUCTS_API_PATH}/:id`,
   param("id").isInt().withMessage("Invalid Id"),
   handleInputErrors,
   getProductById
 );
 
 app.post(
-  "/api/products",
+  PRODUCTS_API_PATH,
   body("name").notEmpty().withMessage("Product name is required"),
   body("price")
     .isNumeric()
@@ -29,4 +34,23 @@ app.post(
   createProduct
 );
 
+app.put(
+  `${PRODUCTS_API_PATH}/:id`,
+  body("name").notEmpty().withMessage("Product name is required"),
+  body("price")
+    .isNumeric()
+    .withMessage("Invalid price")
+    .notEmpty()
+    .withMessage("Product price is required"),
+  body("availability").isBoolean().withMessage("Invalid Product availability"),
+  handleInputErrors,
+  updateProduct
+);
+
+app.patch(
+  `${PRODUCTS_API_PATH}/:id`,
+  body("availability").isBoolean().withMessage("Invalid Product availability"),
+  handleInputErrors,
+  updateAvaiability
+);
 export default app;
