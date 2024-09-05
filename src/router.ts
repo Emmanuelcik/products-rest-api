@@ -6,9 +6,9 @@ import {
   updateProduct,
   updateAvaiability,
   deleteProduct,
-} from "./handlers/products.js";
+} from "./handlers/products.ts";
 import { body, param } from "express-validator";
-import { handleInputErrors } from "./middleware/index.js";
+import { handleInputErrors } from "./middleware/index.ts";
 
 const PRODUCTS_API_PATH = "/api/products";
 

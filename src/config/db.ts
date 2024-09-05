@@ -2,7 +2,7 @@ import { Sequelize } from "sequelize-typescript";
 import dotenv from "dotenv";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
-import Product from "../models/Product.model.js";
+import Product from "../models/Product.model.ts";
 
 dotenv.config();
 

@@ -1,6 +1,6 @@
 import express from "express";
-import router from "./router.js";
-import db from "./config/db.js";
+import router from "./router.ts";
+import db from "./config/db.ts";
 import colors from "colors";
 
 async function connectDB() {
