@@ -1,7 +1,9 @@
 import express from "express";
 import router from "./router.ts";
+import swaggerUi from "swagger-ui-express";
 import db from "./config/db.ts";
 import colors from "colors";
+import swaggerSpect, { swaggerUiOptions } from "./config/swagger.ts";
 
 async function connectDB() {
   try {
@@ -21,5 +23,12 @@ const app = express();
 // Get data from request object
 app.use(express.json());
 app.use("/", router);
+
+// Docs
+app.use(
+  "/docs",
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerSpect, swaggerUiOptions)
+);
 
 export default app;
